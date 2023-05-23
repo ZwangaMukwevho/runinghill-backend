@@ -2,13 +2,13 @@ package resource
 
 import "github.com/gin-gonic/gin"
 
-func NewRouter() *gin.Engine {
+func NewRouter(handler Handler) *gin.Engine {
 
 	router := gin.Default()
-    router.GET("/word", getWords)
-	router.POST("/word",postWord)
-	router.GET("/sentence",getSentence)
-	router.POST("/sentence",postSentence)
+	router.GET("/word", handler.getWords)
+	router.POST("/word", handler.postWord)
+	router.GET("/sentence", handler.getSentence)
+	router.POST("/sentence", handler.postSentence)
 
 	return router
 }
