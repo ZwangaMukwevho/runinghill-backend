@@ -14,7 +14,7 @@ func InitDB(databaseURL string, serviceFile string) (*db.Client, error) {
 
 	// configure database URL
 	conf := &firebase.Config{
-		DatabaseURL: "https://runinghill-backend-db-default-rtdb.firebaseio.com",
+		DatabaseURL: databaseURL,
 	}
 
 	// fetch service account key
