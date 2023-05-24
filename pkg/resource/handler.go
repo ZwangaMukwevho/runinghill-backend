@@ -2,7 +2,6 @@ package resource
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -26,17 +25,17 @@ func (h *Handler) getWords(c *gin.Context) {
 		c.IndentedJSON(http.StatusInternalServerError, err)
 		return
 	}
-	// ref := h.FirebaseClient.NewRef("words")
-	// var words []model.Word
-	// if err := ref.Get(context.Background(), &words); err != nil {
-	// 	c.IndentedJSON(http.StatusInternalServerError, err)
-	// 	// return nil, fmt.Errorf("failed to fetch words from Firebase: %v", err)
-	// }
 
-	c.IndentedJSON(http.StatusOK, words)
+	wordsArr := make([]model.Word, 0, len(words))
+	for _, word := range words {
+		wordsArr = append(wordsArr, word)
+	}
+
+	c.IndentedJSON(http.StatusOK, wordsArr)
 }
 
 func (h *Handler) postWords(c *gin.Context) {
+	var errArray []string
 	var words = []model.Word{}
 
 	// Call BindJSON to bind the received JSON to
@@ -45,88 +44,67 @@ func (h *Handler) postWords(c *gin.Context) {
 		return
 	}
 
-	// var ind string
-	// for index, word := range words {
-	// 	// id
-	// 	// := uuid.New().String()
-	// 	ind = "one"
-	// 	if index == 1 {
-	// 		ind = "two"
-	// 	}
-	// 	refString := fmt.Sprintf("words/%s", ind)
-	// 	ref := h.FirebaseClient.NewRef(refString)
-	// 	err := ref.Set(context.TODO(), word)
-	// 	if err != nil {
-	// 		error := fmt.Errorf("an error occured processing word with Id: %s, with exception: %w", word.ID, err)
-	// 		log.Fatal(error)
-	// 		c.IndentedJSON(http.StatusInternalServerError, error)
-	// 		return
-	// 	}
-	// }
-
-	// for _, word := range words {
-	// 	_, err := ref.Push(context.TODO(), word)
-	// 	if err != nil {
-	// 		error := fmt.Errorf("an error occured processing word with Id: %s, with exception: %w", word.ID, err)
-	// 		log.Fatal(error)
-	// 		c.IndentedJSON(http.StatusInternalServerError, error)
-	// 		return
-	// 	}
-	// }
 	ref := h.FirebaseClient.NewRef("words")
 	for _, word := range words {
-
 		wordRef := ref.Child(word.ID)
 
-		// Convert the word struct to JSON
-		wordJSON, err := json.Marshal(word)
-
-		fmt.Print(wordJSON)
-		if err != nil {
-			c.IndentedJSON(http.StatusInternalServerError, err)
-			return
-			// return fmt.Errorf("failed to marshal word: %v", err)
-		}
-		fmt.Print(wordRef)
 		// Set the value in Firebase Realtime Database
 		if err := wordRef.Set(context.Background(), word); err != nil {
-			c.IndentedJSON(http.StatusInternalServerError, err)
-			return
-			// return fmt.Errorf("failed to upload word to Firebase: %v", err)
+			errArray = append(errArray, fmt.Sprintf("error uploading sentence with Id %s, with error: %s", word.ID, err))
 		}
+	}
+
+	if len(errArray) != 0 {
+		c.IndentedJSON(http.StatusInternalServerError, errArray)
+		return
 	}
 
 	c.IndentedJSON(http.StatusOK, words)
 }
 
 func (h *Handler) getSentence(c *gin.Context) {
-	var sentence []model.Sentence
+	var sentences map[string]model.Sentence
 
-	ref := h.FirebaseClient.NewRef("sentence/")
-	if err := ref.Get(context.TODO(), &sentence); err != nil {
-		log.Fatal(err)
+	ref := h.FirebaseClient.NewRef("sentences")
+	if err := ref.Get(context.Background(), &sentences); err != nil {
+		log.Panic(err)
 		c.IndentedJSON(http.StatusInternalServerError, err)
 		return
 	}
 
-	c.IndentedJSON(http.StatusOK, sentence)
+	sentenceArr := make([]model.Sentence, 0, len(sentences))
+	for _, sentence := range sentences {
+		sentenceArr = append(sentenceArr, sentence)
+	}
+
+	c.IndentedJSON(http.StatusOK, sentenceArr)
 }
 
 func (h *Handler) postSentence(c *gin.Context) {
+	var errArray []string
+	var sentences = []model.Sentence{}
 
-	var sentence = []model.Sentence{}
 	// Call BindJSON to bind the received JSON to
-	if err := c.BindJSON(&sentence); err != nil {
+	if err := c.BindJSON(&sentences); err != nil {
 		c.IndentedJSON(http.StatusUnprocessableEntity, err)
 		return
 	}
 
-	ref := h.FirebaseClient.NewRef("sentence/")
-	if err := ref.Set(context.TODO(), sentence); err != nil {
-		log.Fatal(err)
-		c.IndentedJSON(http.StatusInternalServerError, err)
+	ref := h.FirebaseClient.NewRef("sentences")
+	for _, sentence := range sentences {
+		sentenceRef := ref.Child(sentence.ID)
+
+		// Set the value in Firebase Realtime Database
+		if err := sentenceRef.Set(context.Background(), sentence); err != nil {
+			errArray = append(errArray, fmt.Sprintf("error uploading sentence with Id %s, with error: %s", sentence.ID, err))
+		}
+	}
+
+	if len(errArray) != 0 {
+		log.Panic(errArray)
+		c.IndentedJSON(http.StatusInternalServerError, errArray)
 		return
 	}
 
-	c.IndentedJSON(http.StatusOK, sentence)
+	c.IndentedJSON(http.StatusOK, sentences)
 }
