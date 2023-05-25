@@ -7,7 +7,9 @@ import (
 	"net/http"
 
 	"firebase.google.com/go/db"
+	"github.com/ZwangaMukwevho/backend-api/pkg/enums"
 	"github.com/ZwangaMukwevho/backend-api/pkg/model"
+	"github.com/ZwangaMukwevho/backend-api/pkg/service"
 	"github.com/gin-gonic/gin"
 )
 
@@ -107,4 +109,21 @@ func (h *Handler) postSentence(c *gin.Context) {
 	}
 
 	c.IndentedJSON(http.StatusOK, sentences)
+}
+
+func (h *Handler) getWordsByType(c *gin.Context) {
+	wordType := c.Param("type")
+
+	var words map[string]model.Word
+
+	ref := h.FirebaseClient.NewRef("words")
+	if err := ref.Get(context.Background(), &words); err != nil {
+		log.Panic(err)
+		c.IndentedJSON(http.StatusInternalServerError, err)
+		return
+	}
+
+	filteredWords := service.GetWordsByType(words, enums.WordType(wordType))
+
+	c.IndentedJSON(http.StatusOK, filteredWords)
 }
