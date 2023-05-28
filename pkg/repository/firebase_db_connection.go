@@ -32,5 +32,6 @@ func InitDB(databaseURL string, serviceFile string) (*db.Client, error) {
 		return nil, err
 	}
 
+	log.Print("Successfully initialised ")
 	return *&client, err
 }

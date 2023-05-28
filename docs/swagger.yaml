@@ -1,0 +1,152 @@
+definitions:
+  model.Sentence:
+    properties:
+      id:
+        type: string
+      sentence:
+        type: string
+      userid:
+        type: string
+    type: object
+  model.Word:
+    properties:
+      id:
+        type: string
+      type:
+        type: string
+      word:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /sentences:
+    get:
+      description: Get all sentences from the Firebase Realtime Database
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.Sentence'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get all sentences
+      tags:
+      - sentences
+    post:
+      consumes:
+      - application/json
+      description: Add sentences to the Firebase Realtime Database
+      parameters:
+      - description: Array of sentences to add
+        in: body
+        name: sentences
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/model.Sentence'
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.Sentence'
+            type: array
+        "422":
+          description: Unprocessable Entity
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Add sentences
+      tags:
+      - sentences
+  /words:
+    get:
+      description: Get all words from the Firebase Realtime Database
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.Word'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get all words
+      tags:
+      - words
+    post:
+      consumes:
+      - application/json
+      description: Add words to the Firebase Realtime Database
+      parameters:
+      - description: Array of words to add
+        in: body
+        name: words
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/model.Word'
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.Word'
+            type: array
+        "422":
+          description: Unprocessable Entity
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Add words
+      tags:
+      - words
+  /words/{type}:
+    get:
+      description: Get words filtered by type from the Firebase Realtime Database
+      parameters:
+      - description: Word type
+        in: path
+        name: type
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.Word'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get words by type
+      tags:
+      - words
+swagger: "2.0"

@@ -17,6 +17,13 @@ type Handler struct {
 	FirebaseClient *db.Client
 }
 
+// @Summary Get all words
+// @Description Get all words from the Firebase Realtime Database
+// @Tags words
+// @Produce json
+// @Success 200 {array} model.Word
+// @Failure 500 {string} string "Internal Server Error"
+// @Router /words [get]
 func (h *Handler) getWords(c *gin.Context) {
 
 	var words map[string]model.Word
@@ -36,6 +43,16 @@ func (h *Handler) getWords(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, wordsArr)
 }
 
+// @Summary Add words
+// @Description Add words to the Firebase Realtime Database
+// @Tags words
+// @Accept json
+// @Produce json
+// @Param words body []model.Word true "Array of words to add"
+// @Success 200 {array} model.Word
+// @Failure 422 {string} string "Unprocessable Entity"
+// @Failure 500 {string} string "Internal Server Error"
+// @Router /words [post]
 func (h *Handler) postWords(c *gin.Context) {
 	var errArray []string
 	var words = []model.Word{}
@@ -64,6 +81,13 @@ func (h *Handler) postWords(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, words)
 }
 
+// @Summary Get all sentences
+// @Description Get all sentences from the Firebase Realtime Database
+// @Tags sentences
+// @Produce json
+// @Success 200 {array} model.Sentence
+// @Failure 500 {string} string "Internal Server Error"
+// @Router /sentences [get]
 func (h *Handler) getSentence(c *gin.Context) {
 	var sentences map[string]model.Sentence
 
@@ -82,12 +106,23 @@ func (h *Handler) getSentence(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, sentenceArr)
 }
 
+// @Summary Add sentences
+// @Description Add sentences to the Firebase Realtime Database
+// @Tags sentences
+// @Accept json
+// @Produce json
+// @Param sentences body []model.Sentence true "Array of sentences to add"
+// @Success 200 {array} model.Sentence
+// @Failure 422 {string} string "Unprocessable Entity"
+// @Failure 500 {string} string "Internal Server Error"
+// @Router /sentences [post]
 func (h *Handler) postSentence(c *gin.Context) {
 	var errArray []string
 	var sentences = []model.Sentence{}
 
 	// Call BindJSON to bind the received JSON to
 	if err := c.BindJSON(&sentences); err != nil {
+		log.Panic(err)
 		c.IndentedJSON(http.StatusUnprocessableEntity, err)
 		return
 	}
@@ -111,6 +146,14 @@ func (h *Handler) postSentence(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, sentences)
 }
 
+// @Summary Get words by type
+// @Description Get words filtered by type from the Firebase Realtime Database
+// @Tags words
+// @Produce json
+// @Param type path string true "Word type"
+// @Success 200 {array} model.Word
+// @Failure 500 {string} string "Internal Server Error"
+// @Router /words/{type} [get]
 func (h *Handler) getWordsByType(c *gin.Context) {
 	wordType := c.Param("type")
 
