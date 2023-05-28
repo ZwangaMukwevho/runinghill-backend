@@ -7,6 +7,7 @@ To view endpoints and payloads for each endpoint:
 - Copy the contents on swagger.json or swagger.yml
 - Visit [Swagger](https://editor.swagger.io/) and past the contents
 - This will show endpoints for the api
+- Application runs on port 8080
 
 # Running
 - install go modules. ```go mod tidy```
