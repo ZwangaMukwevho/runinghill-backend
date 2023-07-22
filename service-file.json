@@ -1,13 +1,1 @@
-{
-  "type": "service_account",
-  "project_id": "runinghill-backend-db",
-  "private_key_id": "9f1aaadb1cad2dfad17228e7aff0dbde08fe19bd",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCoKarX2WFztSMZ\n3FsR2KBvvmIkwekX1a0ZgaWJYjS/gEzuBiuIkCQY8ypFTCwLm70uTbK/KZR3VfKd\nnWoC8dTpmSkTAChiwOM8Te20bn7J7b5bXOzAAuN5fzA1yNpbZwmyRI7mD8g8eepw\ngAd2Iud115Hk+Fhu0Y8/0d0Z+Phav6dlkwYELTh50mPwEsmnG1UUPoG8Kn4BHwsa\npI4ZWOgpCdGV7zAkGGW8qv6zzHMITrIO84sVYVwGstdxYjK3it2BpPbca29WoLOS\nOeaL08ukLdedrnffmRsepGlikRzMCZ4D98D+saAxvjiaeHHz34634hE2z8A80fXS\njn1tz4ArAgMBAAECggEAN0CBhqxA7cCdSNjy/zka9bwrCQLBcHhfiJrlZe9jf2xL\nWoWidhtOEPiMcfpmGmZQUU9sJI0n39HYhlr7Qv5sQ1h0e2641kGkJ+M+7+LCO9ym\nh+RPUYNhdEEK+REGVbPUJsOJ5CNZWi2Ajvgx+2nafQiYQhArFjY6h/CPYgJAr6fx\natAs+aArWtNN85Khs9NdzE8KXxba8tnU64o3bcvoHBYJGA9jXD5vh4AsWBCfn7Dy\nHCFBrlqCeJDGojEwf4iTUbx0tslEvIywp+854F6KYPaV+nZgEuDmu1Wew/OgSjin\n2NUguNwLoUZjTS0gdCuF6egZP4e38cxFl1RmhNh9YQKBgQDtJwabFrXS6NtcYt4h\nrrG0lj8hTvHzoN8UZNjm2X3eyDWysQU9ifDgmRSLX9rzQHuhmHlhFpTCOfjREVRJ\nGCP9EacwACicrGPtccqjIdQVF8kghPo9tNRDsWeV7DPZEI2muJgPlTLNOKA9UQPY\ngBaAyRKlIJqR5JtbeAeq5XfQMQKBgQC1hwPgzoSwRm062lg/alp2HNtPYG0HYKgc\nmFhzsBfWMoUwc+TUnHyrex213cUQEgDcr72oml9z04Me0Z4aT2/5LJjG1W/mFNm2\n7/c2lDwNJt01S3b1TfW4gFauzXfng2ffi/1FgphkFUgDZnV4wTeJDy7f/o+7WcSl\nFP1UvzV7GwKBgFaK41I9W2T4LPTt73oDMj5ghfE1yf3KOx5KHw0/WTuvfEkVaIAo\nkoqj0md6N4CFi5hQ+BqCDw9B8Jb65/M0qA12H7jYlfl2v5Cq8fPOKIL6Bx+i518V\nWlDJsK95XwJblBW/T16AZ+WUQIWfxvN+6rdcqT0xRLbw4fDjQIkQ7ERBAoGAQ/Pf\n0sbcSvSCLTbRNCQG6xIQUt2A0vMu2014Rw5TTf6pdyLbNW/DB5pV29/BxitHIVW0\nRKpNMxmpit7jNWwpOXilVEFP2yxQ97dKrqa8+BtlUW8Hf/qIEmIQkO0fho3dU4Se\n8edaTpTc2VEAhoyl0mvZm0Y63eJTx4xc7N2LEqMCgYBwo8EoevRtiZo95bcJjQhM\nWXv2zTlzzANFAEHlWPYIHV0cevYHkNkJboE9AQAbtmZjpF1pRr2GymF+RK3w6Elg\nP3eUQwirgPcFlZrCY/gTOFuG/qcqp3yEtZ7JN+5Ecy46xq1uUD+SaqjrxdDfQK4x\nF43iPxD/pwnL0lzFG5WZ6Q==\n-----END PRIVATE KEY-----\n",
-  "client_email": "firebase-adminsdk-6pqfw@runinghill-backend-db.iam.gserviceaccount.com",
-  "client_id": "105835887673680991450",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-6pqfw%40runinghill-backend-db.iam.gserviceaccount.com",
-  "universe_domain": "googleapis.com"
-}
+
